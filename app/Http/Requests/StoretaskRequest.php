@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Contracts\Validation\validationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoretaskRequest extends FormRequest
@@ -12,7 +12,7 @@ class StoretaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,8 @@ class StoretaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'is_completed' => ['required', 'boolean'],
         ];
     }
 }
