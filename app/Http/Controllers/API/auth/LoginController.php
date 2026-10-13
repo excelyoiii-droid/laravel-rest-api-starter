@@ -15,7 +15,14 @@ class LoginController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // return response()->json([
+        //     'request' => $request->all(),
+        // ], Response::HTTP_OK);
         $user = User::where('email', $request->email)->first();
+        // return response()->json([
+        //     'user' => $user,
+        //     'request' => $request->all(),
+        // ], Response::HTTP_OK);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'message' => 'Invalid credentials'
@@ -25,6 +32,7 @@ class LoginController extends Controller
         return response()->json([
             'token' => $token,
             'user' => $user,
+            'request' => $request->all(),
         ], Response::HTTP_OK);
     }
 }
